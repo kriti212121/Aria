@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aira - AI-Driven Authoring Platform</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNCIgZmlsbD0iIzAwNjRkMiIvPgo8cGF0aCBkPSJNOCAyNEwxNiA4TDI0IDI0SDE5TDE3IDE5SDEzTDExIDI0SDhaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="workflow-templates.css">
+    <link rel="stylesheet" href="comms-alert-styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <span class="logo-text">Aira</span>
+                </div>
+                <nav class="nav">
+                    <a href="#dashboard" class="nav-link active" data-view="dashboard">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Dashboard
+                    </a>
+                    <a href="#editor" class="nav-link" data-view="editor">
+                        <i class="fas fa-edit"></i>
+                        Content Editor
+                    </a>
+                    <a href="#assets" class="nav-link" data-view="assets">
+                        <i class="fas fa-folder-open"></i>
+                        Asset Library
+                    </a>
+                    <a href="#workflows" class="nav-link" data-view="workflows">
+                        <i class="fas fa-project-diagram"></i>
+                        Workflows
+                    </a>
+                    <a href="#alerts" class="nav-link" data-view="alerts">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        eWatch Alerts
+                        <span class="alert-badge" id="alert-count-badge">2</span>
+                    </a>
+                </nav>
+                <div class="header-actions">
+                    <div class="user-menu">
+                        <div class="user-avatar">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" alt="John Doe">
+                        </div>
+                        <span class="user-name">John Doe</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard View -->
+            <div id="dashboard-view" class="view active">
+                <div class="dashboard-header">
+                    <div class="page-title">
+                        <h1>Content Management</h1>
+                        <p>Manage your content drafts, approvals, and workflows</p>
+                    </div>
+                    <div class="dashboard-actions">
+                        <button class="btn btn-secondary manage-approvers-btn">
+                            <i class="fas fa-users-cog"></i>
+                            Manage Approvers
+                        </button>
+                        <button class="btn btn-primary create-content-btn">
+                            <i class="fas fa-plus"></i>
+                            Create New Content
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Performance Metrics -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-label">Average Rating</div>
+                            <div class="metric-value">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="rating-value">4.2</span>
+                                <span class="rating-count">(2 articles)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-label">Total Views</div>
+                            <div class="metric-value">
+                                <span class="metric-number">88,930</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-label">Success Rate</div>
+                            <div class="metric-value">
+                                <span class="metric-number">82%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search and Filters -->
+                <div class="content-controls">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search content..." id="content-search">
+                    </div>
+                    <div class="content-tabs">
+                        <button class="tab-btn active" data-tab="all">All Content (8)</button>
+                        <button class="tab-btn" data-tab="drafts">Drafts (2)</button>
+                        <button class="tab-btn" data-tab="review">In Review (2)</button>
+                        <button class="tab-btn" data-tab="published">Published (4)</button>
+                        <button class="tab-btn" data-tab="tasks">My Tasks (8)</button>
+                    </div>
+                </div>
+
+                <!-- Content Table -->
+                <div class="content-table-container">
+                    <table class="content-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Status</th>
+                                <th>Performance</th>
+                                <th>Views</th>
+                                <th>Last Edited</th>
+                                <th>Assigned Reviewers</th>
+                                <th>Workflow</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="content-table-body">
+                            <tr class="content-row" data-id="1">
+                                <td class="title-cell">
+                                    <div class="content-title">How to return an item for a refund</div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-draft">Draft</span>
+                                </td>
+                                <td class="performance-cell">
+                                    <div class="rating-stars small">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span class="rating-value">4.2</span>
+                                    <div class="performance-label">Good</div>
+                                    <div class="review-count">1247 reviews</div>
+                                </td>
+                                <td class="views-cell">
+                                    <div class="view-count">45,230</div>
+                                    <div class="view-percentage">89% helpful</div>
+                                </td>
+                                <td class="time-cell">
+                                    <div class="time-value">2 hours ago</div>
+                                </td>
+                                <td class="reviewers-cell">
+                                    <div class="reviewer-tags">
+                                        <span class="reviewer-tag">SM</span>
+                                        <span class="reviewer-tag">LT</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="workflow-type">Serial</span>
+                                </td>
+                                <td class="actions-cell">
+                                    <button class="action-btn view-btn" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn delete-btn" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="content-row" data-id="2">
+                                <td class="title-cell">
+                                    <div class="content-title">eBay Money Back Guarantee - Buyer Protection</div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-review">In Review</span>
+                                </td>
+                                <td class="performance-cell">
+                                    <div class="rating-stars small">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="rating-value">4.7</span>
+                                    <div class="performance-label">Excellent</div>
+                                    <div class="review-count">2156 reviews</div>
+                                </td>
+                                <td class="views-cell">
+                                    <div class="view-count">78,420</div>
+                                    <div class="view-percentage">94% helpful</div>
+                                </td>
+                                <td class="time-cell">
+                                    <div class="time-value">1 day ago</div>
+                                </td>
+                                <td class="reviewers-cell">
+                                    <div class="reviewer-tags">
+                                        <span class="reviewer-tag">MK</span>
+                                        <span class="reviewer-tag">LT</span>
+                                        <span class="reviewer-tag">O</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="workflow-type">Parallel</span>
+                                </td>
+                                <td class="actions-cell">
+                                    <button class="action-btn view-btn" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn delete-btn" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="content-row" data-id="3">
+                                <td class="title-cell">
+                                    <div class="content-title">Understanding refund timelines and payment methods</div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-published">Published</span>
+                                </td>
+                                <td class="performance-cell">
+                                    <div class="rating-stars small">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span class="rating-value">3.9</span>
+                                    <div class="performance-label">Average</div>
+                                    <div class="review-count">892 reviews</div>
+                                </td>
+                                <td class="views-cell">
+                                    <div class="view-count">32,150</div>
+                                    <div class="view-percentage">78% helpful</div>
+                                </td>
+                                <td class="time-cell">
+                                    <div class="time-value">3 days ago</div>
+                                </td>
+                                <td class="reviewers-cell">
+                                    <div class="reviewer-tags">
+                                        <span class="reviewer-tag">LT</span>
+                                        <span class="reviewer-tag">PT</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="workflow-type">Serial</span>
+                                </td>
+                                <td class="actions-cell">
+                                    <button class="action-btn view-btn" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn delete-btn" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="content-row" data-id="4">
+                                <td class="title-cell">
+                                    <div class="content-title">Return shipping options and costs</div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-draft">Draft</span>
+                                </td>
+                                <td class="performance-cell">
+                                    <div class="rating-stars small">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span class="rating-value">3.6</span>
+                                    <div class="performance-label">Average</div>
+                                    <div class="review-count">634 reviews</div>
+                                </td>
+                                <td class="views-cell">
+                                    <div class="view-count">18,920</div>
+                                    <div class="view-percentage">72% helpful</div>
+                                </td>
+                                <td class="time-cell">
+                                    <div class="time-value">5 hours ago</div>
+                                </td>
+                                <td class="reviewers-cell">
+                                    <div class="reviewer-tags">
+                                        <span class="reviewer-tag">O</span>
+                                        <span class="reviewer-tag">CS</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="workflow-type">Serial</span>
+                                </td>
+                                <td class="actions-cell">
+                                    <button class="action-btn view-btn" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn delete-btn" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="content-row" data-id="5">
+                                <td class="title-cell">
+                                    <div class="content-title">Managing account settings and preferences</div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-published">Published</span>
+                                </td>
+                                <td class="performance-cell">
+                                    <div class="rating-stars small">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="rating-value">4.4</span>
+                                    <div class="performance-label">Good</div>
+                                    <div class="review-count">1523 reviews</div>
+                                </td>
+                                <td class="views-cell">
+                                    <div class="view-count">56,780</div>
+                                    <div class="view-percentage">86% helpful</div>
+                                </td>
+                                <td class="time-cell">
+                                    <div class="time-value">1 week ago</div>
+                                </td>
+                                <td class="reviewers-cell">
+                                    <div class="reviewer-tags">
+                                        <span class="reviewer-tag">TT</span>
+                                        <span class="reviewer-tag">UT</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="workflow-type">Parallel</span>
+                                </td>
+                                <td class="actions-cell">
+                                    <button class="action-btn view-btn" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="action-btn edit-btn" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn delete-btn" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Content Editor View -->
+            <div id="editor-view" class="view">
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <div class="editor-title">
+                            <h2>Content Editor</h2>
+                            <div class="breadcrumb">
+                                <span>Dashboard</span>
+                                <i class="fas fa-chevron-right"></i>
+                                <span>Content Editor</span>
+                            </div>
+                        </div>
+                        <div class="editor-actions">
+                            <button class="btn btn-secondary save-draft-btn">
+                                <i class="fas fa-save"></i>
+                                Save Draft
+                            </button>
+                            <button class="btn btn-primary submit-review-btn">
+                                <i class="fas fa-paper-plane"></i>
+                                Submit for Review
+                            </button>
+                            <div class="export-menu">
+                                <button class="btn btn-outline export-btn">
+                                    <i class="fas fa-download"></i>
+                                    Export
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="export-dropdown">
+                                    <a href="#" class="export-option">
+                                        <i class="fab fa-html5"></i>
+                                        HTML
+                                    </a>
+                                    <a href="#" class="export-option">
+                                        <i class="fas fa-code"></i>
+                                        JSON
+                                    </a>
+                                    <a href="#" class="export-option">
+                                        <i class="fas fa-file-pdf"></i>
+                                        PDF
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-workspace">
+                        <!-- Left Panel: Prompt/Outline Input -->
+                        <div class="left-panel">
+                            <div class="panel-header">
+                                <h3>
+                                    <i class="fas fa-lightbulb"></i>
+                                    Prompt & Outline
+                                </h3>
+                            </div>
+                            <div class="prompt-section">
+                                <div class="prompt-input-area">
+                                    <textarea 
+                                        id="prompt-input" 
+                                        placeholder="Describe what you want to create or paste your outline here..."
+                                        rows="6"
+                                    ></textarea>
+                                </div>
+                                <div class="upload-section">
+                                    <div class="upload-area" id="upload-area">
+                                        <div class="upload-content">
+                                            <i class="fas fa-cloud-upload-alt"></i>
+                                            <p>Drop files here or click to upload</p>
+                                            <span class="upload-types">Images, PDFs, URLs supported</span>
+                                        </div>
+                                        <input type="file" id="file-input" multiple accept=".pdf,.jpg,.jpeg,.png,.gif,.txt,.docx">
+                                    </div>
+                                </div>
+                                <div class="url-input-section">
+                                    <div class="input-group">
+                                        <input type="url" id="url-input" placeholder="Paste URL to analyze...">
+                                        <button class="btn btn-primary analyze-url-btn">
+                                            <i class="fas fa-link"></i>
+                                            Analyze
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="prompt-actions">
+                                    <button class="btn btn-primary generate-content-btn">
+                                        <i class="fas fa-magic"></i>
+                                        Generate Content
+                                    </button>
+                                    <button class="btn btn-outline refine-prompt-btn">
+                                        <i class="fas fa-edit"></i>
+                                        Refine Prompt
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Center Panel: Rich Text Editor -->
+                        <div class="center-panel">
+                            <div class="editor-toolbar">
+                                <div class="toolbar-group">
+                                    <button class="toolbar-btn" data-command="bold" title="Bold">
+                                        <i class="fas fa-bold"></i>
+                                    </button>
+                                    <button class="toolbar-btn" data-command="italic" title="Italic">
+                                        <i class="fas fa-italic"></i>
+                                    </button>
+                                    <button class="toolbar-btn" data-command="underline" title="Underline">
+                                        <i class="fas fa-underline"></i>
+                                    </button>
+                                </div>
+                                <div class="toolbar-group">
+                                    <select class="toolbar-select" id="heading-select">
+                                        <option value="">Normal</option>
+                                        <option value="h1">Heading 1</option>
+                                        <option value="h2">Heading 2</option>
+                                        <option value="h3">Heading 3</option>
+                                    </select>
+                                </div>
+                                <div class="toolbar-group">
+                                    <button class="toolbar-btn" data-command="insertUnorderedList" title="Bullet List">
+                                        <i class="fas fa-list-ul"></i>
+                                    </button>
+                                    <button class="toolbar-btn" data-command="insertOrderedList" title="Numbered List">
+                                        <i class="fas fa-list-ol"></i>
+                                    </button>
+                                </div>
+                                <div class="toolbar-group">
+                                    <button class="toolbar-btn" id="insert-link-btn" title="Insert Link">
+                                        <i class="fas fa-link"></i>
+                                    </button>
+                                    <button class="toolbar-btn" id="insert-image-btn" title="Insert Image">
+                                        <i class="fas fa-image"></i>
+                                    </button>
+                                    <button class="toolbar-btn" id="insert-video-btn" title="Insert Video">
+                                        <i class="fas fa-video"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="editor-content" contenteditable="true" id="main-editor">
+                                <h1>How to Return an Item for a Refund</h1>
+                                
+                                <p>Returning an item on eBay is straightforward and buyer-friendly. This guide will walk you through the entire process, from initiating a return to receiving your refund.</p>
+                                
+                                <h2>When You Can Return an Item</h2>
+                                <p>You can return an item if:</p>
+                                <ul>
+                                    <li>The item doesn't match the description</li>
+                                    <li>The item is damaged or defective</li>
+                                    <li>You received the wrong item</li>
+                                    <li>The seller accepts returns (check the listing)</li>
+                                </ul>
+                                
+                                <h2>How to Start a Return</h2>
+                                <ol>
+                                    <li>Go to your <strong>Purchase history</strong></li>
+                                    <li>Find the item and select <strong>Return this item</strong></li>
+                                    <li>Choose your reason for returning</li>
+                                    <li>Add any additional details</li>
+                                    <li>Submit your return request</li>
+                                </ol>
+                                
+                                <div class="ai-suggestion-bubble" data-suggestion="1">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <span>AI suggests adding a visual guide here</span>
+                                </div>
+                                
+                                <h2>What Happens Next</h2>
+                                <p>After you submit your return request:</p>
+                                <ul>
+                                    <li>The seller has 3 business days to respond</li>
+                                    <li>If approved, you'll get a prepaid return label</li>
+                                    <li>Package the item securely and ship it back</li>
+                                    <li>Your refund will be processed once the seller receives the item</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Right Panel: AI Assistant -->
+                        <div class="right-panel">
+                            <div class="ai-assistant">
+                                <div class="ai-header">
+                                    <div class="ai-avatar">
+                                        <i class="fas fa-robot"></i>
+                                        <div class="ai-status thinking">
+                                            <div class="thinking-dots">
+                                                <span></span>
+                                                <span></span>
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ai-info">
+                                        <h3>Agentic AI Assistant</h3>
+                                        <p>Continuously monitoring content</p>
+                                    </div>
+                                </div>
+
+                                <div class="ai-monitoring">
+                                    <h4>Content Analysis</h4>
+                                    <div class="monitoring-item">
+                                        <div class="monitoring-icon voice-tone">
+                                            <i class="fas fa-microphone"></i>
+                                        </div>
+                                        <div class="monitoring-content">
+                                            <div class="monitoring-label">Voice & Tone</div>
+                                            <div class="monitoring-status good">
+                                                <i class="fas fa-check-circle"></i>
+                                                Matches eBay brand voice
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="monitoring-item">
+                                        <div class="monitoring-icon brand-compliance">
+                                            <i class="fas fa-shield-alt"></i>
+                                        </div>
+                                        <div class="monitoring-content">
+                                            <div class="monitoring-label">Brand Compliance</div>
+                                            <div class="monitoring-status good">
+                                                <i class="fas fa-check-circle"></i>
+                                                Fully compliant
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="monitoring-item">
+                                        <div class="monitoring-icon seo-best-practices">
+                                            <i class="fas fa-search"></i>
+                                        </div>
+                                        <div class="monitoring-content">
+                                            <div class="monitoring-label">SEO & Best Practices</div>
+                                            <div class="monitoring-status warning">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                                Needs meta description
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="monitoring-item">
+                                        <div class="monitoring-icon duplicate-detection">
+                                            <i class="fas fa-copy"></i>
+                                        </div>
+                                        <div class="monitoring-content">
+                                            <div class="monitoring-label">Duplicate Detection</div>
+                                            <div class="monitoring-status good">
+                                                <i class="fas fa-check-circle"></i>
+                                                No duplicates found
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="ai-chat">
+                                    <div class="chat-messages" id="chat-messages">
+                                        <div class="chat-message ai-message">
+                                            <div class="message-avatar">
+                                                <i class="fas fa-robot"></i>
+                                            </div>
+                                            <div class="message-content">
+                                                <p>I'm analyzing your content in real-time. The tone is professional and helpful, perfect for eBay's help documentation.</p>
+                                            </div>
+                                        </div>
+                                        <div class="chat-message ai-message">
+                                            <div class="message-avatar">
+                                                <i class="fas fa-robot"></i>
+                                            </div>
+                                            <div class="message-content">
+                                                <p>Consider adding a visual guide for the return process. This would improve user comprehension by 40%.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="chat-input">
+                                        <input type="text" placeholder="Ask Aira anything..." id="ai-chat-input">
+                                        <button class="chat-send-btn">
+                                            <i class="fas fa-paper-plane"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="quick-actions">
+                                    <h4>Quick Actions</h4>
+                                    <div class="action-buttons">
+                                        <button class="action-btn rewrite-btn">
+                                            <i class="fas fa-edit"></i>
+                                            Rewrite
+                                        </button>
+                                        <button class="action-btn shorten-btn">
+                                            <i class="fas fa-compress-alt"></i>
+                                            Shorten
+                                        </button>
+                                        <button class="action-btn expand-btn">
+                                            <i class="fas fa-expand-alt"></i>
+                                            Expand
+                                        </button>
+                                        <button class="action-btn tone-btn">
+                                            <i class="fas fa-palette"></i>
+                                            Adjust Tone
+                                        </button>
+                                        <button class="action-btn compliance-btn">
+                                            <i class="fas fa-check-double"></i>
+                                            Fix Compliance
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="suggestion-queue">
+                                    <h4>Smart Suggestions</h4>
+                                    <div class="suggestion-item">
+                                        <div class="suggestion-content">
+                                            <p><strong>Add visual guide:</strong> Include step-by-step screenshots for the return process</p>
+                                            <div class="suggestion-actions">
+                                                <button class="btn btn-sm btn-primary accept-suggestion">Accept</button>
+                                                <button class="btn btn-sm btn-outline ignore-suggestion">Ignore</button>
+                                                <button class="btn btn-sm btn-outline learn-more">Learn More</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="suggestion-item">
+                                        <div class="suggestion-content">
+                                            <p><strong>SEO Enhancement:</strong> Add meta description for better search visibility</p>
+                                            <div class="suggestion-actions">
+                                                <button class="btn btn-sm btn-primary accept-suggestion">Accept</button>
+                                                <button class="btn btn-sm btn-outline ignore-suggestion">Ignore</button>
+                                                <button class="btn btn-sm btn-outline learn-more">Learn More</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Asset Library View -->
+            <div id="assets-view" class="view">
+                <div class="assets-container">
+                    <div class="assets-header">
+                        <div class="page-title">
+                            <h1>Asset Library</h1>
+                            <p>Manage reusable content and media assets</p>
+                        </div>
+                        <div class="assets-actions">
+                            <button class="btn btn-primary upload-asset-btn">
+                                <i class="fas fa-upload"></i>
+                                Upload Asset
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="assets-controls">
+                        <div class="search-bar">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search assets..." id="asset-search">
+                        </div>
+                        <div class="asset-filters">
+                            <select id="asset-type-filter">
+                                <option value="">All Types</option>
+                                <option value="text">Text Blocks</option>
+                                <option value="images">Images</option>
+                                <option value="videos">Videos</option>
+                                <option value="files">Files</option>
+                            </select>
+                            <select id="asset-category-filter">
+                                <option value="">All Categories</option>
+                                <option value="headers">Headers</option>
+                                <option value="ctas">CTAs</option>
+                                <option value="descriptions">Descriptions</option>
+                                <option value="translations">Translations</option>
+                                <option value="media">Media</option>
+                            </select>
+                            <div class="view-toggle">
+                                <button class="view-btn grid-view active" data-view="grid">
+                                    <i class="fas fa-th"></i>
+                                </button>
+                                <button class="view-btn list-view" data-view="list">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="assets-grid" id="assets-grid">
+                        <!-- Text Assets -->
+                        <div class="asset-card text-asset" draggable="true" data-type="text" data-category="headers">
+                            <div class="asset-preview">
+                                <div class="text-preview">
+                                    <i class="fas fa-font"></i>
+                                    <p>"How to return an item for a refund"</p>
+                                </div>
+                            </div>
+                            <div class="asset-info">
+                                <div class="asset-title">Return Process Header</div>
+                                <div class="asset-meta">
+                                    <span class="asset-type">Text Block</span>
+                                    <span class="asset-usage">Used 23 times</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="tag">returns</span>
+                                    <span class="tag">header</span>
+                                </div>
+                            </div>
+                            <div class="asset-actions">
+                                <button class="asset-btn preview-btn" title="Preview">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="asset-btn insert-btn" title="Insert">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                                <button class="asset-btn download-btn" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Image Assets -->
+                        <div class="asset-card image-asset" draggable="true" data-type="images" data-category="media">
+                            <div class="asset-preview">
+                                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=300&h=200&fit=crop" alt="Return process diagram">
+                            </div>
+                            <div class="asset-info">
+                                <div class="asset-title">Return Process Diagram</div>
+                                <div class="asset-meta">
+                                    <span class="asset-type">Image</span>
+                                    <span class="asset-usage">Used 15 times</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="tag">diagram</span>
+                                    <span class="tag">process</span>
+                                </div>
+                            </div>
+                            <div class="asset-actions">
+                                <button class="asset-btn preview-btn" title="Preview">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="asset-btn insert-btn" title="Insert">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                                <button class="asset-btn download-btn" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Video Assets -->
+                        <div class="asset-card video-asset" draggable="true" data-type="videos" data-category="media">
+                            <div class="asset-preview">
+                                <div class="video-preview">
+                                    <i class="fas fa-play-circle"></i>
+                                    <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=300&h=200&fit=crop" alt="Video thumbnail">
+                                </div>
+                            </div>
+                            <div class="asset-info">
+                                <div class="asset-title">Return Tutorial Video</div>
+                                <div class="asset-meta">
+                                    <span class="asset-type">Video</span>
+                                    <span class="asset-usage">Used 8 times</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="tag">tutorial</span>
+                                    <span class="tag">video</span>
+                                </div>
+                            </div>
+                            <div class="asset-actions">
+                                <button class="asset-btn preview-btn" title="Preview">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="asset-btn insert-btn" title="Insert">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                                <button class="asset-btn download-btn" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- File Assets -->
+                        <div class="asset-card file-asset" draggable="true" data-type="files" data-category="templates">
+                            <div class="asset-preview">
+                                <div class="file-preview">
+                                    <i class="fas fa-file-pdf"></i>
+                                    <span>PDF</span>
+                                </div>
+                            </div>
+                            <div class="asset-info">
+                                <div class="asset-title">Return Policy Template</div>
+                                <div class="asset-meta">
+                                    <span class="asset-type">PDF File</span>
+                                    <span class="asset-usage">Used 12 times</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="tag">template</span>
+                                    <span class="tag">policy</span>
+                                </div>
+                            </div>
+                            <div class="asset-actions">
+                                <button class="asset-btn preview-btn" title="Preview">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="asset-btn insert-btn" title="Insert">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                                <button class="asset-btn download-btn" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- More text assets -->
+                        <div class="asset-card text-asset" draggable="true" data-type="text" data-category="ctas">
+                            <div class="asset-preview">
+                                <div class="text-preview">
+                                    <i class="fas fa-font"></i>
+                                    <p>"Start your return request"</p>
+                                </div>
+                            </div>
+                            <div class="asset-info">
+                                <div class="asset-title">Return CTA Button</div>
+                                <div class="asset-meta">
+                                    <span class="asset-type">Text Block</span>
+                                    <span class="asset-usage">Used 45 times</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="tag">cta</span>
+                                    <span class="tag">button</span>
+                                </div>
+                            </div>
+                            <div class="asset-actions">
+                                <button class="asset-btn preview-btn" title="Preview">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="asset-btn insert-btn" title="Insert">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                                <button class="asset-btn download-btn" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- More image assets -->
+                        <div class="asset-card image-asset" draggable="true" data-type="images" data-category="media">
+                            <div class="asset-preview">
+                                <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=300&h=200&fit=crop" alt="eBay logo">
+                            </div>
+                            <div class="asset-info">
+                                <div class="asset-title">eBay Brand Logo</div>
+                                <div class="asset-meta">
+                                    <span class="asset-type">Image</span>
+                                    <span class="asset-usage">Used 156 times</span>
+                                </div>
+                                <div class="asset-tags">
+                                    <span class="tag">logo</span>
+                                    <span class="tag">brand</span>
+                                </div>
+                            </div>
+                            <div class="asset-actions">
+                                <button class="asset-btn preview-btn" title="Preview">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="asset-btn insert-btn" title="Insert">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                                <button class="asset-btn download-btn" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- eWatch Alerts View -->
+            <div id="alerts-view" class="view">
+                <div class="alerts-container">
+                    <div class="alerts-header">
+                        <div class="page-title">
+                            <h1>eWatch Alert Management</h1>
+                            <p>Monitor and manage JIRA-generated alerts and guide tagging</p>
+                        </div>
+                        <div class="alerts-actions">
+                            <button class="btn btn-secondary create-manual-alert-btn">
+                                <i class="fas fa-plus"></i>
+                                Create Manual Alert
+                            </button>
+                            <button class="btn btn-primary simulate-jira-btn">
+                                <i class="fas fa-bolt"></i>
+                                Simulate JIRA Ticket
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Alert Metrics -->
+                    <div class="alert-metrics-grid">
+                        <div class="metric-card alert-metric">
+                            <div class="metric-icon critical">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <div class="metric-content">
+                                <div class="metric-label">Active Alerts</div>
+                                <div class="metric-value">
+                                    <span class="metric-number" id="active-alerts-count">2</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="metric-card alert-metric">
+                            <div class="metric-icon high">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="metric-content">
+                                <div class="metric-label">High Priority</div>
+                                <div class="metric-value">
+                                    <span class="metric-number" id="high-priority-count">1</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="metric-card alert-metric">
+                            <div class="metric-icon medium">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <div class="metric-content">
+                                <div class="metric-label">Affected Guides</div>
+                                <div class="metric-value">
+                                    <span class="metric-number" id="affected-guides-count">3</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="metric-card alert-metric">
+                            <div class="metric-icon resolved">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="metric-content">
+                                <div class="metric-label">Avg Resolution</div>
+                                <div class="metric-value">
+                                    <span class="metric-number" id="avg-resolution-time">4.2h</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alert Controls -->
+                    <div class="alert-controls">
+                        <div class="search-bar">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search alerts..." id="alert-search">
+                        </div>
+                        <div class="alert-filters">
+                            <select id="alert-status-filter">
+                                <option value="">All Status</option>
+                                <option value="New">New</option>
+                                <option value="Active">Active</option>
+                                <option value="Resolved">Resolved</option>
+                            </select>
+                            <select id="alert-severity-filter">
+                                <option value="">All Severity</option>
+                                <option value="Critical">Critical</option>
+                                <option value="High">High</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Low">Low</option>
+                            </select>
+                            <select id="alert-source-filter">
+                                <option value="">All Sources</option>
+                                <option value="Agent reports">Agent Reports</option>
+                                <option value="Customer reports">Customer Reports</option>
+                                <option value="System reports">System Reports</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Alert List -->
+                    <div class="alert-list-container">
+                        <div class="alert-list" id="alert-list">
+                            <!-- Alerts will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Workflows View -->
+            <div id="workflows-view" class="view">
+                <div class="workflows-container">
+                    <div class="workflows-header">
+                        <div class="page-title">
+                            <h1>Workflow Management</h1>
+                            <p>Configure and manage approval workflows</p>
+                        </div>
+                        <div class="workflows-actions">
+                            <button class="btn btn-primary create-workflow-btn">
+                                <i class="fas fa-plus"></i>
+                                Create Workflow
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="workflow-templates">
+                        <h3>Workflow Templates</h3>
+                        <div class="templates-grid">
+                            <div class="template-card">
+                                <div class="template-icon">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                                <div class="template-info">
+                                    <h4>Serial Approval</h4>
+                                    <p>Sequential review process</p>
+                                    <div class="template-steps">Legal → Brand → SEO → Publish</div>
+                                </div>
+                                <button class="btn btn-outline use-template-btn">Use Template</button>
+                            </div>
+                            <div class="template-card">
+                                <div class="template-icon">
+                                    <i class="fas fa-code-branch"></i>
+                                </div>
+                                <div class="template-info">
+                                    <h4>Parallel Approval</h4>
+                                    <p>Simultaneous review process</p>
+                                    <div class="template-steps">Legal + Brand + SEO → Publish</div>
+                                </div>
+                                <button class="btn btn-outline use-template-btn">Use Template</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-approvals">
+                        <h3>Content Approvals</h3>
+                        <div class="approval-tabs">
+                            <button class="approval-tab-btn active" data-tab="pending">Pending Approval (2)</button>
+                            <button class="approval-tab-btn" data-tab="in-review">In Review (1)</button>
+                            <button class="approval-tab-btn" data-tab="approved">Recently Approved (3)</button>
+                        </div>
+                        
+                        <div class="approval-content-list">
+                            <div class="approval-content-item">
+                                <div class="approval-item-info">
+                                    <h4>How to return an item for a refund</h4>
+                                    <p>Submitted 2 hours ago by John Doe</p>
+                                    <div class="approval-workflow-status">
+                                        <div class="workflow-step completed">
+                                            <i class="fas fa-check"></i>
+                                            <span>Author</span>
+                                        </div>
+                                        <div class="workflow-step pending">
+                                            <i class="fas fa-clock"></i>
+                                            <span>Legal Review</span>
+                                        </div>
+                                        <div class="workflow-step">
+                                            <i class="fas fa-circle"></i>
+                                            <span>Brand Review</span>
+                                        </div>
+                                        <div class="workflow-step">
+                                            <i class="fas fa-circle"></i>
+                                            <span>Publish</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="approval-item-actions">
+                                    <button class="btn btn-sm btn-primary review-content-btn">Review</button>
+                                    <button class="btn btn-sm btn-outline view-content-btn">View</button>
+                                </div>
+                            </div>
+                            
+                            <div class="approval-content-item">
+                                <div class="approval-item-info">
+                                    <h4>eBay Money Back Guarantee - Buyer Protection</h4>
+                                    <p>Submitted 1 day ago by Sarah Miller</p>
+                                    <div class="approval-workflow-status">
+                                        <div class="workflow-step completed">
+                                            <i class="fas fa-check"></i>
+                                            <span>Author</span>
+                                        </div>
+                                        <div class="workflow-step completed">
+                                            <i class="fas fa-check"></i>
+                                            <span>Legal Review</span>
+                                        </div>
+                                        <div class="workflow-step active">
+                                            <i class="fas fa-clock"></i>
+                                            <span>Brand Review</span>
+                                        </div>
+                                        <div class="workflow-step">
+                                            <i class="fas fa-circle"></i>
+                                            <span>Publish</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="approval-item-actions">
+                                    <button class="btn btn-sm btn-primary review-content-btn">Review</button>
+                                    <button class="btn btn-sm btn-outline view-content-btn">View</button>
+                                </div>
+                            </div>
+                            
+                            <div class="approval-content-item published">
+                                <div class="approval-item-info">
+                                    <h4>Understanding refund timelines and payment methods</h4>
+                                    <p>Published 3 days ago • Approved by Legal Team, Brand Team</p>
+                                    <div class="approval-workflow-status">
+                                        <div class="workflow-step completed">
+                                            <i class="fas fa-check"></i>
+                                            <span>Author</span>
+                                        </div>
+                                        <div class="workflow-step completed">
+                                            <i class="fas fa-check"></i>
+                                            <span>Legal Review</span>
+                                        </div>
+                                        <div class="workflow-step completed">
+                                            <i class="fas fa-check"></i>
+                                            <span>Brand Review</span>
+                                        </div>
+                                        <div class="workflow-step completed">
+                                            <i class="fas fa-check"></i>
+                                            <span>Published</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="approval-item-actions">
+                                    <button class="btn btn-sm btn-outline view-content-btn">View Published</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="active-workflows">
+                        <h3>Active Workflows</h3>
+                        <div class="workflow-list">
+                            <div class="workflow-item">
+                                <div class="workflow-info">
+                                    <h4>Return Policy Update</h4>
+                                    <p>Serial workflow • 3 reviewers</p>
+                                    <div class="workflow-assignees">
+                                        <span class="assignee completed">Legal Team ✓</span>
+                                        <span class="assignee active">Brand Team</span>
+                                        <span class="assignee pending">SEO Team</span>
+                                    </div>
+                                </div>
+                                <div class="workflow-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 66%"></div>
+                                    </div>
+                                    <span class="progress-text">2 of 3 completed</span>
+                                </div>
+                                <div class="workflow-actions">
+                                    <button class="btn btn-sm btn-outline">View</button>
+                                    <button class="btn btn-sm btn-outline">Edit</button>
+                                </div>
+                            </div>
+                            <div class="workflow-item">
+                                <div class="workflow-info">
+                                    <h4>Buyer Protection Guide</h4>
+                                    <p>Parallel workflow • 3 reviewers</p>
+                                    <div class="workflow-assignees">
+                                        <span class="assignee completed">Legal Team ✓</span>
+                                        <span class="assignee completed">Brand Team ✓</span>
+                                        <span class="assignee completed">SEO Team ✓</span>
+                                    </div>
+                                </div>
+                                <div class="workflow-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 100%"></div>
+                                    </div>
+                                    <span class="progress-text">Completed</span>
+                                </div>
+                                <div class="workflow-actions">
+                                    <button class="btn btn-sm btn-outline">View</button>
+                                    <button class="btn btn-sm btn-outline">Archive</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Modals -->
+        <!-- Workflow Configuration Modal -->
+        <div id="workflow-modal" class="modal">
+            <div class="modal-content large">
+                <div class="modal-header">
+                    <h2>Configure Workflow</h2>
+                    <button class="modal-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="workflow-config">
+                        <div class="config-section">
+                            <h3>Workflow Type</h3>
+                            <div class="workflow-type-options">
+                                <label class="radio-option">
+                                    <input type="radio" name="workflow-type" value="serial" checked>
+                                    <div class="option-content">
+                                        <i class="fas fa-arrow-right"></i>
+                                        <span>Serial</span>
+                                        <p>Sequential approval process</p>
+                                    </div>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="workflow-type" value="parallel">
+                                    <div class="option-content">
+                                        <i class="fas fa-code-branch"></i>
+                                        <span>Parallel</span>
+                                        <p>Simultaneous approval process</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="config-section">
+                            <h3>Add Reviewers</h3>
+                            <div class="reviewers-list">
+                                <div class="reviewer-item">
+                                    <select class="reviewer-select">
+                                        <option value="">Select reviewer...</option>
+                                        <option value="legal">Legal Team</option>
+                                        <option value="brand">Brand Team</option>
+                                        <option value="seo">SEO Team</option>
+                                        <option value="content">Content Team</option>
+                                    </select>
+                                    <select class="role-select">
+                                        <option value="">Select role...</option>
+                                        <option value="legal">Legal</option>
+                                        <option value="brand">Brand</option>
+                                        <option value="seo">SEO</option>
+                                        <option value="content">Content</option>
+                                    </select>
+                                    <input type="date" class="deadline-input" placeholder="Deadline">
+                                    <button class="remove-reviewer-btn">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline add-reviewer-btn">
+                                <i class="fas fa-plus"></i>
+                                Add Reviewer
+                            </button>
+                        </div>
+                        
+                        <div class="config-section">
+                            <h3>Workflow Preview</h3>
+                            <div class="workflow-preview">
+                                <div class="workflow-step">
+                                    <div class="step-icon">
+                                        <i class="fas fa-edit"></i>
+                                    </div>
+                                    <span>Author</span>
+                                </div>
+                                <div class="workflow-arrow">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                                <div class="workflow-step">
+                                    <div class="step-icon">
+                                        <i class="fas fa-gavel"></i>
+                                    </div>
+                                    <span>Legal</span>
+                                </div>
+                                <div class="workflow-arrow">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                                <div class="workflow-step">
+                                    <div class="step-icon">
+                                        <i class="fas fa-palette"></i>
+                                    </div>
+                                    <span>Brand</span>
+                                </div>
+                                <div class="workflow-arrow">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                                <div class="workflow-step">
+                                    <div class="step-icon">
+                                        <i class="fas fa-rocket"></i>
+                                    </div>
+                                    <span>Publish</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary cancel-workflow-btn">Cancel</button>
+                    <button class="btn btn-primary start-workflow-btn">Start Workflow</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Suggestions Modal -->
+        <div id="ai-suggestions-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>AI Suggestions</h2>
+                    <button class="modal-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="suggestions-tabs">
+                        <button class="tab-btn active" data-tab="rewrites">Rewrites</button>
+                        <button class="tab-btn" data-tab="tone">Tone Adjustments</button>
+                        <button class="tab-btn" data-tab="length">Expand/Shorten</button>
+                        <button class="tab-btn" data-tab="compliance">Fix Compliance</button>
+                    </div>
+                    <div class="suggestions-content">
+                        <div class="suggestion-comparison">
+                            <div class="original-text">
+                                <h4>Original Text</h4>
+                                <p>Returning an item on eBay is straightforward and buyer-friendly.</p>
+                            </div>
+                            <div class="suggested-text">
+                                <h4>Suggested Version</h4>
+                                <p>eBay makes returning items simple and hassle-free for all buyers.</p>
+                            </div>
+                        </div>
+                        <div class="suggestion-actions">
+                            <button class="btn btn-outline reject-btn">Reject</button>
+                            <button class="btn btn-primary accept-btn">Accept</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary apply-all-btn">Apply All</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content View Modal -->
+        <div id="content-view-modal" class="modal">
+            <div class="modal-content large">
+                <div class="modal-header">
+                    <h2>Content Preview</h2>
+                    <button class="modal-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="content-preview">
+                        <div class="preview-content" id="preview-content">
+                            <!-- Content will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary close-preview-btn">Close</button>
+                    <button class="btn btn-primary edit-content-btn">Edit Content</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Approval Workflow Modal -->
+        <div id="approval-modal" class="modal">
+            <div class="modal-content large">
+                <div class="modal-header">
+                    <h2>Approval Workflow</h2>
+                    <button class="modal-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="approval-content">
+                        <div class="approval-header">
+                            <h3>How to Return an Item for a Refund</h3>
+                            <div class="workflow-tracker">
+                                <div class="tracker-step completed">
+                                    <i class="fas fa-check"></i>
+                                    <span>Author</span>
+                                </div>
+                                <div class="tracker-step active">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Legal Review</span>
+                                </div>
+                                <div class="tracker-step">
+                                    <i class="fas fa-circle"></i>
+                                    <span>Brand Review</span>
+                                </div>
+                                <div class="tracker-step">
+                                    <i class="fas fa-circle"></i>
+                                    <span>Publish</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="approval-body">
+                            <div class="content-section">
+                                <div class="readonly-content">
+                                    <!-- Read-only content preview -->
+                                    <h1>How to Return an Item for a Refund</h1>
+                                    <p>Returning an item on eBay is straightforward and buyer-friendly. This guide will walk you through the entire process, from initiating a return to receiving your refund.</p>
+                                    <!-- More content... -->
+                                </div>
+                            </div>
+                            
+                            <div class="compliance-section">
+                                <h4>Compliance Summary</h4>
+                                <div class="compliance-indicators">
+                                    <div class="indicator green">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>Brand Voice</span>
+                                    </div>
+                                    <div class="indicator green">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>Legal Compliance</span>
+                                    </div>
+                                    <div class="indicator yellow">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                        <span>SEO Optimization</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="comment-section">
+                                <h4>Comments</h4>
+                                <textarea placeholder="Add your review comments..." rows="4"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger reject-btn">Reject</button>
+                    <button class="btn btn-warning request-changes-btn">Request Changes</button>
+                    <button class="btn btn-success approve-btn">Approve</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Approver Management Modal -->
+        <div id="approver-management-modal" class="modal">
+            <div class="modal-content large">
+                <div class="modal-header">
+                    <h2>Manage Approvers</h2>
+                    <button class="modal-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="approver-management">
+                        <div class="approver-section">
+                            <h3>Current Approvers</h3>
+                            <div class="approvers-list">
+                                <div class="approver-card">
+                                    <div class="approver-info">
+                                        <div class="approver-avatar">
+                                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=40&h=40&fit=crop&crop=face" alt="Sarah Miller">
+                                        </div>
+                                        <div class="approver-details">
+                                            <h4>Sarah Miller</h4>
+                                            <p>Social Media Manager</p>
+                                            <div class="approver-tags">
+                                                <span class="tag auto-assigned">Auto-assigned: Social Media</span>
+                                                <span class="tag manual">Manual: Brand Review</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="approver-actions">
+                                        <button class="btn btn-sm btn-outline edit-approver-btn">Edit</button>
+                                        <button class="btn btn-sm btn-danger remove-approver-btn">Remove</button>
+                                    </div>
+                                </div>
+                                <div class="approver-card">
+                                    <div class="approver-info">
+                                        <div class="approver-avatar">
+                                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" alt="Legal Team">
+                                        </div>
+                                        <div class="approver-details">
+                                            <h4>Legal Team</h4>
+                                            <p>Legal Department</p>
+                                            <div class="approver-tags">
+                                                <span class="tag auto-assigned">Auto-assigned: Legal Content</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="approver-actions">
+                                        <button class="btn btn-sm btn-outline edit-approver-btn">Edit</button>
+                                        <button class="btn btn-sm btn-danger remove-approver-btn">Remove</button>
+                                    </div>
+                                </div>
+                                <div class="approver-card">
+                                    <div class="approver-info">
+                                        <div class="approver-avatar">
+                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face" alt="Mike Kumar">
+                                        </div>
+                                        <div class="approver-details">
+                                            <h4>Mike Kumar</h4>
+                                            <p>Marketing Director</p>
+                                            <div class="approver-tags">
+                                                <span class="tag auto-assigned">Auto-assigned: Marketing</span>
+                                                <span class="tag manual">Manual: Product Updates</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="approver-actions">
+                                        <button class="btn btn-sm btn-outline edit-approver-btn">Edit</button>
+                                        <button class="btn btn-sm btn-danger remove-approver-btn">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="auto-assignment-section">
+                            <h3>Auto-Assignment Rules</h3>
+                            <div class="rules-list">
+                                <div class="rule-item">
+                                    <div class="rule-info">
+                                        <h4>Legal Content Detection</h4>
+                                        <p>Automatically assigns Legal Team when content contains legal terms, policies, or compliance keywords</p>
+                                        <div class="rule-keywords">
+                                            <span class="keyword">policy</span>
+                                            <span class="keyword">terms</span>
+                                            <span class="keyword">legal</span>
+                                            <span class="keyword">compliance</span>
+                                            <span class="keyword">refund</span>
+                                        </div>
+                                    </div>
+                                    <div class="rule-toggle">
+                                        <label class="switch">
+                                            <input type="checkbox" checked>
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="rule-item">
+                                    <div class="rule-info">
+                                        <h4>Social Media Content</h4>
+                                        <p>Automatically assigns Social Media Manager for content related to social platforms and community</p>
+                                        <div class="rule-keywords">
+                                            <span class="keyword">social</span>
+                                            <span class="keyword">community</span>
+                                            <span class="keyword">share</span>
+                                            <span class="keyword">post</span>
+                                        </div>
+                                    </div>
+                                    <div class="rule-toggle">
+                                        <label class="switch">
+                                            <input type="checkbox" checked>
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="rule-item">
+                                    <div class="rule-info">
+                                        <h4>Product & Marketing</h4>
+                                        <p>Automatically assigns Marketing Director for product updates, features, and promotional content</p>
+                                        <div class="rule-keywords">
+                                            <span class="keyword">product</span>
+                                            <span class="keyword">feature</span>
+                                            <span class="keyword">update</span>
+                                            <span class="keyword">promotion</span>
+                                        </div>
+                                    </div>
+                                    <div class="rule-toggle">
+                                        <label class="switch">
+                                            <input type="checkbox" checked>
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline add-rule-btn">
+                                <i class="fas fa-plus"></i>
+                                Add New Rule
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary cancel-approver-btn">Cancel</button>
+                    <button class="btn btn-primary save-approvers-btn">Save Changes</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Drag and Drop Overlay -->
+        <div id="drop-overlay" class="drop-overlay">
+            <div class="drop-content">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h3>Drop to add to content</h3>
+                <p>Release to insert the asset into your content</p>
+            </div>
+        </div>
+
+        <!-- Notification Toast -->
+        <div id="notification" class="notification">
+            <div class="notification-content">
+                <i class="fas fa-check-circle"></i>
+                <span id="notification-text">Action completed successfully!</span>
+            </div>
+            <button class="notification-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
